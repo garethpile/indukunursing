@@ -4,4 +4,20 @@ type Applicant @model @auth(rules: [{allow: public}]) {
   lastName: String
   email: AWSEmail
   mobileNumber: AWSPhone
+  nationality: String
+  hospitalLocation: String
+  currentHospital: String
+  bedCapacity:String
+  position:String
+  Experience:String
+  qualification:String
+  married: Boolean
+  Children: String
+  Age: String
+  IELTS: Boolean
+  NCLEX: Boolean
+  visaScreen: Boolean
+  yearsRegisteredNurse: String
+  familyImmigration: Boolean
+  selfDescription: String
 }
