@@ -1,23 +1,88 @@
+type NursingEquipment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  equipment: String
+  description: String
+  nursingworkexperienceID: ID! @index(name: "byNursingWorkExperience")
+}
+
+type NursingCases @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  case: String
+  description: String
+  nursingworkexperienceID: ID! @index(name: "byNursingWorkExperience")
+}
+
+type NursingResponsibilities @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  responsibility: String
+  description: String
+  nursingworkexperienceID: ID! @index(name: "byNursingWorkExperience")
+}
+
+type NursingWorkSummary @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  summarySkillsAttributes: String
+}
+
+type NursingWorkExperience @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  startDate: AWSDate
+  endDate: AWSDate
+  hospital: String
+  hospitalLocation: String
+  bedCapacity: Int
+  nurseToPatientRatio: String
+  NursingResponsibilities: [NursingResponsibilities] @hasMany(indexName: "byNursingWorkExperience", fields: ["id"])
+  NursingCases: [NursingCases] @hasMany(indexName: "byNursingWorkExperience", fields: ["id"])
+  NursingEquipments: [NursingEquipment] @hasMany(indexName: "byNursingWorkExperience", fields: ["id"])
+}
+
+type ImmigrationInformation @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  familyImmigration: Boolean
+  IELTS: Boolean
+  NCLEX: Boolean
+  visaScreen: Boolean
+  yearsRegisteredNurse: Int
+}
+
+type ContactDetails @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  emailAddress: AWSEmail
+  contactNumber: AWSPhone
+}
+
+type Children @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  lastName: String
+  firstName: String
+  gender: String
+  Age: Int
+  applicantID: ID! @index(name: "byApplicant")
+}
+
+type Address @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  addressType: String
+  addressLine1: String
+  addressLine2: String
+  addressLine3: String
+  suburb: String
+  province: String
+  country: String
+  postalCode: String
+  applicantID: ID! @index(name: "byApplicant")
+}
+
 type Applicant @model @auth(rules: [{allow: public}]) {
   id: ID!
   firstName: String
   lastName: String
-  email: AWSEmail
-  mobileNumber: AWSPhone
+  gender: String
   nationality: String
-  hospitalLocation: String
-  currentHospital: String
-  bedCapacity:String
-  position:String
-  Experience:String
-  qualification:String
   married: Boolean
-  Children: String
-  Age: String
-  IELTS: Boolean
-  NCLEX: Boolean
-  visaScreen: Boolean
-  yearsRegisteredNurse: String
-  familyImmigration: Boolean
-  selfDescription: String
+  qualification: String
+  Addresses: [Address] @hasMany(indexName: "byApplicant", fields: ["id"])
+  ImmigrationInformation: ImmigrationInformation @hasOne
 }
+ 

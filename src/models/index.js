@@ -4,8 +4,17 @@ import { schema } from './schema';
 
 
 
-const { Applicant } = initSchema(schema);
+const { NursingEquipment, NursingCases, NursingResponsibilities, NursingWorkSummary, NursingWorkExperience, ImmigrationInformation, ContactDetails, Children, Address, Applicant } = initSchema(schema);
 
 export {
+  NursingEquipment,
+  NursingCases,
+  NursingResponsibilities,
+  NursingWorkSummary,
+  NursingWorkExperience,
+  ImmigrationInformation,
+  ContactDetails,
+  Children,
+  Address,
   Applicant
 };
